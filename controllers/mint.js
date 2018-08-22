@@ -4,6 +4,7 @@ var moment = require('moment');
 var request = require('request');
 var axios = require('axios');
 var qs = require('qs');
+var fs = require('fs');
 
 var Mint = require('../models/mint');
 /*
@@ -133,7 +134,8 @@ async function getMintOrders(req, res) {
             lista: lista
         });               
     }).on('error', function(e){
-        console.log('From handler: ' + e);        
+        let str = moment().format('DD/MM/YYYY HH:mm:ss') + ' (M1NT Controller): ' + e + '\r\n';
+        fs.appendFileSync('log_jtp.txt', str, 'utf-8');
     });
 }
 
